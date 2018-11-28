@@ -7,6 +7,10 @@
 
 ![img](https://user-images.githubusercontent.com/44853425/49075879-14e12a00-f27b-11e8-8476-a18990085a3c.png)
 
+## Project Long-Term Plan
+
+![oss_projectplan](https://user-images.githubusercontent.com/45195784/49156552-fb1a1280-f360-11e8-8e4b-2e0ce4ee9632.PNG)
+
 ## Steganography란
 
 스테가노그래피(Steganography)는 데이터 은폐 기술 중 하나이며, 데이터를 다른 데이터에 삽입하는 기술 혹은 그 연구를 가리킨다. 
