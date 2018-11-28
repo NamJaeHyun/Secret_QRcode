@@ -1,88 +1,7 @@
-/* 
- * QR Code generator library (JavaScript)
- * 
- * Copyright (c) Project Nayuki. (MIT License)
- * https://www.nayuki.io/page/qr-code-generator-library
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
- * - The above copyright notice and this permission notice shall be included in
- *   all copies or substantial portions of the Software.
- * - The Software is provided "as is", without warranty of any kind, express or
- *   implied, including but not limited to the warranties of merchantability,
- *   fitness for a particular purpose and noninfringement. In no event shall the
- *   authors or copyright holders be liable for any claim, damages or other
- *   liability, whether in an action of contract, tort or otherwise, arising from,
- *   out of or in connection with the Software or the use or other dealings in the
- *   Software.
- */
-
 "use strict";
-
-
-/* 
- * Module "qrcodegen", public members:
- * - Class QrCode:
- *   - Function encodeText(str text, QrCode.Ecc ecl) -> QrCode
- *   - Function encodeBinary(list<byte> data, QrCode.Ecc ecl) -> QrCode
- *   - Function encodeSegments(list<QrSegment> segs, QrCode.Ecc ecl,
- *         int minVersion=1, int maxVersion=40, mask=-1, boostEcl=true) -> QrCode
- *   - Constants int MIN_VERSION, MAX_VERSION
- *   - Constructor QrCode(int version, QrCode.Ecc ecl, list<byte> dataCodewords, int mask)
- *   - Fields int version, size, mask
- *   - Field QrCode.Ecc errorCorrectionLevel
- *   - Method getModule(int x, int y) -> bool
- *   - Method drawCanvas(int scale, int border, HTMLCanvasElement canvas) -> void
- *   - Method toSvgString(int border) -> str
- *   - Enum Ecc:
- *     - Constants LOW, MEDIUM, QUARTILE, HIGH
- *     - Field int ordinal
- * - Class QrSegment:
- *   - Function makeBytes(list<byte> data) -> QrSegment
- *   - Function makeNumeric(str data) -> QrSegment
- *   - Function makeAlphanumeric(str data) -> QrSegment
- *   - Function makeSegments(str text) -> list<QrSegment>
- *   - Function makeEci(int assignVal) -> QrSegment
- *   - Constructor QrSegment(QrSegment.Mode mode, int numChars, list<int> bitData)
- *   - Field QrSegment.Mode mode
- *   - Field int numChars
- *   - Method getData() -> list<int>
- *   - Constants RegExp NUMERIC_REGEX, ALPHANUMERIC_REGEX
- *   - Enum Mode:
- *     - Constants NUMERIC, ALPHANUMERIC, BYTE, KANJI, ECI
- */
 var qrcodegen = new function() {
 	
-	/*---- QR Code symbol class ----*/
-	
-	/* 
-	 * A class that represents a QR Code symbol, which is a type of two-dimension barcode.
-	 * Invented by Denso Wave and described in the ISO/IEC 18004 standard.
-	 * Instances of this class represent an immutable square grid of black and white cells.
-	 * The class provides static factory functions to create a QR Code from text or binary data.
-	 * The class covers the QR Code Model 2 specification, supporting all versions (sizes)
-	 * from 1 to 40, all 4 error correction levels, and 4 character encoding modes.
-	 * 
-	 * Ways to create a QR Code object:
-	 * - High level: Take the payload data and call QrCode.encodeText() or QrCode.encodeBinary().
-	 * - Mid level: Custom-make the list of segments and call QrCode.encodeSegments().
-	 * - Low level: Custom-make the array of data codeword bytes (including
-	 *   segment headers and final padding, excluding error correction codewords),
-	 *   supply the appropriate version number, and call the QrCode() constructor.
-	 * (Note that all ways require supplying the desired error correction level.)
-	 * 
-	 * This constructor creates a new QR Code with the given version number,
-	 * error correction level, data codeword bytes, and mask number.
-	 * This is a low-level API that most users should not use directly.
-	 * A mid-level API is the encodeSegments() function.
-	 */
 	this.QrCode = function(version, errCorLvl, dataCodewords, mask) {
-		
-		/*---- Constructor (low level) ----*/
 		
 		// Check scalar arguments
 		if (version < MIN_VERSION || version > MAX_VERSION)
@@ -167,8 +86,6 @@ var qrcodegen = new function() {
 		// The drawn image is be purely black and white, and fully opaque.
 		// The scale must be a positive integer and the border must be a non-negative integer.
 		this.drawCanvas = function(scale, border, canvas) {
-			if (scale <= 0 || border < 0)
-				throw "Value out of range";
 			var width = (size + border * 2) * scale;
 			canvas.width = width;
 			canvas.height = width;
