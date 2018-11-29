@@ -27,12 +27,6 @@ var qrcodegen = new function() {
 	this.QrCode = function(version, errCorLvl, dataCodewords, mask) {
 		
 		// Check scalar arguments
-		if (version < MIN_VERSION || version > MAX_VERSION)
-			throw "Version value out of range";
-		if (mask < -1 || mask > 7)
-			throw "Mask value out of range";
-		if (!(errCorLvl instanceof Ecc))
-			throw "QrCode.Ecc expected";
 		var size = version * 4 + 17;
 		
 		// Initialize both grids to be size*size arrays of Boolean false
@@ -65,8 +59,6 @@ var qrcodegen = new function() {
 				applyMask(i);  // Undoes the mask due to XOR
 			}
 		}
-		if (mask < 0 || mask > 7)
-			throw "Assertion error";
 		applyMask(mask);  // Apply the final choice of mask
 		drawFormatBits(mask);  // Overwrite old format bits
 		
@@ -531,12 +523,6 @@ var qrcodegen = new function() {
 				throw "Data too long";
 		}
 		
-		// Increase the error correction level while the data still fits in the current version number
-		[this.Ecc.MEDIUM, this.Ecc.QUARTILE, this.Ecc.HIGH].forEach(function(newEcl) {  // From low to high
-			if (boostEcl && dataUsedBits <= QrCode.getNumDataCodewords(version, newEcl) * 8)
-				ecl = newEcl;
-		});
-		
 		// Concatenate all segments to create the data bit string
 		var bb = new BitBuffer();
 		segs.forEach(function(seg) {
@@ -664,9 +650,6 @@ var qrcodegen = new function() {
 	 */
 	this.QrCode.Ecc = {
 		LOW     : new Ecc(0, 1),  // The QR Code can tolerate about  7% erroneous codewords
-		MEDIUM  : new Ecc(1, 0),  // The QR Code can tolerate about 15% erroneous codewords
-		QUARTILE: new Ecc(2, 3),  // The QR Code can tolerate about 25% erroneous codewords
-		HIGH    : new Ecc(3, 2),  // The QR Code can tolerate about 30% erroneous codewords
 	};
 	
 	

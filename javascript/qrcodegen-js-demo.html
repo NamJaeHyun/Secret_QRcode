@@ -20,68 +20,55 @@
   -   out of or in connection with the Software or the use or other dealings in the
   -   Software.
   -->
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>QR Code generator library demo (JavaScript)</title>
-	<style type="text/css">
-	html {
-		font-family: sans-serif;
-	}
-	td {
-		vertical-align: top;
-		padding-top: 0.2em;
-		padding-bottom: 0.2em;
-	}
-	td:first-child {
-		white-space: pre;
-		padding-right: 0.5em;
-	}
-	input[type=radio], input[type=checkbox] {
-		margin: 0em;
-		padding: 0em;
-	}
-	</style>
-</head>
-
-<body>
-<h1>Secret QRcode</h1>
-<form action="#" method="get" onsubmit="return false;">
-	<table class="noborder" style="width:100%">
-		<tbody>
-			<tr>
-				<td><strong>Common Information:</strong></td>
-				<td style="width:100%"><textarea placeholder="Enter common text to be put into the QR Code" id="text-input" style="width:100%; max-width:30em; height:5em; font-family:inherit"></textarea></td>
-			</tr>
-			<tr>
-				<td><strong>Secret Information:</strong></td>
-				<td style="width:100%"><textarea placeholder="Enter secret text to be put into the QR Code" id="stext-input" style="width:100%; max-width:30em; height:5em; font-family:inherit"></textarea></td>
-			</tr>
-			<tr>
-				<td><strong>QR Code:</strong></td>
-				<td>
-					<canvas id="qrcode-canvas" style="width:300px; height:300px; padding:1em; background-color:#E8E8E8"></canvas>
-					<svg id="qrcode-svg" style="width:30em; height:30em; padding:1em; background-color:#E8E8E8">
-						<rect width="100%" height="100%" fill="#FFFFFF" stroke-width="0"></rect>
-						<path d="" fill="#000000" stroke-width="0"></path>
-					</svg>
-				</td>
-			</tr>
-			<tr>
-				<td>Version range:</td>
-				<td>
-					Minimum = <input type="number" value="1"  min="1" max="40" step="1" id="version-min-input" style="width:4em" oninput="app.handleVersionMinMax('min');">,
-					maximum = <input type="number" value="40" min="1" max="40" step="1" id="version-max-input" style="width:4em" oninput="app.handleVersionMinMax('max');">
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</form>
-<script type="application/javascript" src="qrcodegen.js"></script>
-<script type="application/javascript" src="qrcodegen-demo.js"></script>
-<hr>
-<p>Copyright © Project Nayuki – <a href="https://www.nayuki.io/page/qr-code-generator-library">https://www.nayuki.io/page/qr-code-generator-library</a></p>
-</body>
-</html>
+  
+  <!DOCTYPE html>
+  <html>
+  <head>
+	  <meta charset="UTF-8">
+	  <title>Secret QRcode</title>
+	  <style type="text/css">
+	  html {
+		  font-family: sans-serif;
+	  }
+	  td {
+		  vertical-align: top;
+		  padding-top: 0.2em;
+		  padding-bottom: 0.2em;
+	  }
+	  td:first-child {
+		  white-space: pre;
+		  padding-right: 0.5em;
+	  }
+	  </style>
+  </head>
+  
+  <body>
+  <h1>Secret QRcode</h1>
+  <form action="#" method="get" onsubmit="return false;">
+	  <table class="noborder" style="width:100%">
+		  <tbody>
+			  <tr>
+				  <td><strong>Common Information:</strong></td>
+				  <td style="width:100%"><textarea placeholder="Enter common text to be put into the QR Code" id="text-input" style="width:100%; max-width:30em; height:5em; font-family:inherit"></textarea></td>
+			  </tr>
+			  <tr>
+				  <td><strong>Secret Information:</strong></td>
+				  <td style="width:100%"><textarea placeholder="Enter secret text to be put into the QR Code" id="stext-input" style="width:100%; max-width:30em; height:5em; font-family:inherit"></textarea></td>
+			  </tr>
+			  <tr>
+				  <td><strong>QR Code:</strong></td>
+				  <td>
+					  <canvas id="qrcode-canvas" style="width:300px; height:300px; padding:1em; background-color:#E8E8E8"></canvas>
+					  <svg id="qrcode-svg" style="width:30em; height:30em; padding:1em; background-color:#E8E8E8">
+						  <rect width="100%" height="100%" fill="#FFFFFF" stroke-width="0"></rect>
+						  <path d="" fill="#000000" stroke-width="0"></path>
+					  </svg>
+				  </td>
+			  </tr>
+		  </tbody>
+	  </table>
+  </form>
+  <script type="application/javascript" src="qrcodegen.js"></script>
+  <script type="application/javascript" src="qrcodegen-demo.js"></script>
+  </body>
+  </html>
